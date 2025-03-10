@@ -1,0 +1,38 @@
+<!--<p>Hola mundo</p>
+
+<p>{{ title }}</p>
+
+<p>El apellido de Edin es {{ apellido }} y su edad es {{ edad }}</p>
+
+<p>la suma de dos y dos es {{ 2 + 2 }}</p>
+
+<p>El doble de 3 es {{duplicarNumero(3)}}</p>-->
+
+<h2>Datos de la pelicula</h2>
+
+<!--<h4>Implementacion clasica con *ngFor</h4>
+
+<div *ngFor="let pelicula of peliculas, let indece = index">
+    <p>{{indece}}) Titulo: {{pelicula.titulo | uppercase}}</p>
+    <p>Fecha de Lanzamiento: {{pelicula.fechaLanzamiento | date: 'dd-MMMM-yyyy'| uppercase}}</p>
+    <p>Precio: {{pelicula.precio | currency}}</p>
+</div>
+
+<h4>Implementacion moderna con For</h4>-->
+
+@for (pelicula of peliculas; track $index) {
+    <div class="contenedor-pelicula">
+        <div class="flex">
+            <div>
+                <img [ngSrc]="pelicula.poster" alt="" [priority] ="$index === 0" width="169" height="250">
+            </div>
+        
+            <div>
+                <p>{{$index}}) Titulo: {{pelicula.titulo | uppercase}}</p>
+                <p>Fecha de Lanzamiento: {{pelicula.fechaLanzamiento | date: 'dd-MMMM-yyyy'| uppercase}}</p>
+                <p>Precio: {{pelicula.precio | currency}}</p>
+            </div>
+        </div>
+        
+    </div>
+}
