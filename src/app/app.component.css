@@ -1,19 +1,8 @@
-p {
-    color: black;
+input{
+    display: none;
 }
 
-.contenedor-pelicula{
-    border: 1px solid black;
-    margin-bottom: 1rem;
-    padding: 1rem;
-}
-
-/*img{
-    width:169; height:250
-}*/
-
-.flex {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+.contenedor{
+    margin: 0 100px;
+    padding-bottom: 100px;
 }
