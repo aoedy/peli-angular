@@ -171,5 +171,5 @@ export class FiltroPeliculasComponent implements OnInit{
     }];
 
   peliculas = this.peliculasOriginal;
-
+  
 }
