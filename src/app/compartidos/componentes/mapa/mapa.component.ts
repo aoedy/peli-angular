@@ -49,7 +49,7 @@ export class MapaComponent implements OnInit{
 
   manejarClick(event: LeafletMouseEvent) {
     const latitud = event.latlng.lat;
-    const longitud = event.latlng.lat;
+    const longitud = event.latlng.lng;
 
     this.capas = [];
     this.capas.push(marker([latitud, longitud], this.markerOptions));

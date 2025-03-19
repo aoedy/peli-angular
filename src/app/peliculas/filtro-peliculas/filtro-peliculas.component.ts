@@ -8,6 +8,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { ListadoPeliculasComponent } from "../listado-peliculas/listado-peliculas.component";
 import { Filtropeliculas } from './filtroPelicula';
 
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-filtro-peliculas',
   imports: [MatButtonModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatSelectModule, MatCheckboxModule, ListadoPeliculasComponent],
@@ -16,36 +19,88 @@ import { Filtropeliculas } from './filtroPelicula';
 })
 export class FiltroPeliculasComponent implements OnInit{
   ngOnInit(): void {
+    this.leerValoresURL();
+    this.buscarPeliculas(this.form.value as Filtropeliculas);
     this.form.valueChanges.subscribe(valores => {
       this.peliculas = this.peliculasOriginal;
-      this.buscarPeliculas(valores as Filtropeliculas)
-    });
+      this.buscarPeliculas(valores as Filtropeliculas);
+      this.escribirParametrosBusquedaEnURL(valores as Filtropeliculas);
+    })
   }
 
   buscarPeliculas(valores: Filtropeliculas) {
     if (valores.titulo) {
-      this.peliculas = this.peliculas.filter(pelicula => pelicula.titulo.indexOf(valores.titulo) !== -1);
+      this.peliculas = this.peliculas.filter(pelicula => pelicula.titulo.indexOf(valores.titulo) !== -1)
     }
 
-    if (valores.generoId) {
+    if (valores.generoId !== 0) {
       this.peliculas = this.peliculas.filter(pelicula => pelicula.generos.indexOf(valores.generoId) !== -1);
     }
 
     if (valores.proximosEstrenos) {
-      this.peliculas = this.peliculas.filter(pelicula => pelicula.proximosEstrenos)
+      this.peliculas = this.peliculas.filter(pelicula => pelicula.proximosEstrenos);
     }
 
     if (valores.enCines) {
-      this.peliculas = this.peliculas.filter(pelicula => pelicula.enCines)
+      this.peliculas = this.peliculas.filter(pelicula => pelicula.enCines);
     }
+  }
+  
+  escribirParametrosBusquedaEnURL(valores: Filtropeliculas) {
+    let queryString = [];
+
+    if (valores.titulo) {
+      queryString.push(`titulo = ${encodeURIComponent(valores.titulo)}`);
+    }
+
+    if (valores.generoId !== 0) {
+      queryString.push(`generoId = ${valores.generoId}`);
+    }
+
+    if (valores.proximosEstrenos) {
+      queryString.push(`proximosEstrenos = ${valores.proximosEstrenos}`);
+    }
+
+    if (valores.enCines) {
+      queryString.push(`encCines = ${valores.enCines}`);
+    }
+
+    this.location.replaceState('peliculas/filtar', queryString.join('&'));
+  }
+
+  leerValoresURL() {
+    this.activatedRoute.queryParams.subscribe((params: any) => {
+      var objeto: any = {};
+
+      if (params.titulo) {
+        objeto.titulo = params.titulo;
+      }
+
+      if (params.generoId) {
+        objeto.generoId = Number(params.generoId);
+      }
+
+      if (params.proximosEstrenos) {
+        objeto.proximosEstrenos = params.proximosEstrenos;
+      }
+
+      if (params.enCines) {
+        objeto.enCines = params.enCines;
+      }
+
+      this.form.patchValue(objeto);
+
+    })
   }
 
   limpiar() {
     this.form.patchValue({titulo: '', generoId: 0, proximosEstrenos: false, enCines: false});
   }
 
-  private formBuilder = inject(FormBuilder)
-
+  private formBuilder = inject(FormBuilder);
+  private location = inject(Location);
+  private activatedRoute = inject(ActivatedRoute);
+    
   form = this.formBuilder.group({
     titulo: '',
     generoId: 0,

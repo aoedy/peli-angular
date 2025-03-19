@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { CineCreacionDTO } from '../cines';
 import { MapaComponent } from "../../compartidos/componentes/mapa/mapa.component";
 import { Coordenada } from '../../compartidos/componentes/mapa/Coordenada';
+import { primeraLetraMayuscula } from '../../compartidos/funciones/validaciones';
 
 @Component({
   selector: 'app-formulario-cines',
@@ -33,7 +34,7 @@ export class FormularioCinesComponent implements OnInit{
   private formBuilder = inject(FormBuilder);
 
   form = this.formBuilder.group({
-    nombre: ['', {validators: [Validators.required]}], 
+    nombre: ['', {validators: [Validators.required, primeraLetraMayuscula()]}], 
     latitud: new FormControl<number | null>(null, [Validators.required]),
     longitud: new FormControl<number | null>(null, [Validators.required])    
   })
@@ -43,6 +44,10 @@ export class FormularioCinesComponent implements OnInit{
 
     if (nombre.hasError('required')) {
       return "El campo nombre es requerido";
+    }
+
+    if (nombre.hasError('primeraLetraMayuscula')){
+      return nombre.getError('primeraLetraMayuscula').mensaje;
     }
   
     return "";

@@ -26,9 +26,9 @@ export class FormularioGeneroComponent implements OnInit{
   @Output()
   posteoFormulario = new EventEmitter<GeneroCreacionDTO>();
 
-  private formbuilder = inject(FormBuilder);
+  private formBuilder = inject(FormBuilder);
   
-  form = this.formbuilder.group({
+  form = this.formBuilder.group({
     nombre: ['', {validators: [Validators.required, primeraLetraMayuscula()]}]
   })
   
