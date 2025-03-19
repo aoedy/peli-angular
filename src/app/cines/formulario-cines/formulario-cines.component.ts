@@ -18,6 +18,7 @@ export class FormularioCinesComponent implements OnInit{
   ngOnInit(): void {
     if (this.modelo !== undefined) {
       this.form.patchValue(this.modelo);
+      this.coordenadasIniciales.push({latitud: this.modelo.latitud, longitud: this.modelo.longitud})
     }
   }
 
@@ -27,12 +28,14 @@ export class FormularioCinesComponent implements OnInit{
   @Output()
   posteoFormulario = new EventEmitter<CineCreacionDTO>();
 
+  coordenadasIniciales: Coordenada[] = [];
+
   private formBuilder = inject(FormBuilder);
 
   form = this.formBuilder.group({
     nombre: ['', {validators: [Validators.required]}], 
     latitud: new FormControl<number | null>(null, [Validators.required]),
-    longitud: new FormControl<number | null>(null, [Validators.required])
+    longitud: new FormControl<number | null>(null, [Validators.required])    
   })
 
   obtenerErrorCampoNombre(): string {
@@ -46,7 +49,7 @@ export class FormularioCinesComponent implements OnInit{
   }
 
   coodenadaSeleccionada(coordenada: Coordenada) {
-    this.form.patchValue(coordenada);
+   this.form.patchValue(coordenada);
   }
 
   guardarCambios() {

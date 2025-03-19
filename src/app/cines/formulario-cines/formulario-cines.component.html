@@ -7,7 +7,7 @@
 
     <h4>Seleccione la ubicación del cine</h4>
 
-    <app-mapa (coordenadaSeleccionada)="coodenadaSeleccionada($event)"></app-mapa>
+    <app-mapa (coordenadaSeleccionada)="coodenadaSeleccionada($event)" [coordenadasIniciales]="coordenadasIniciales"></app-mapa>
 
     <div class="contenedor-botones">
         <button type="submit" mat-flat-button [disabled]="form.invalid">Guardar Cambios</button>
