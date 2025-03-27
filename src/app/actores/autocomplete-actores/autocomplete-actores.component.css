@@ -1,0 +1,23 @@
+img {
+    vertical-align: middle;
+    margin-right: 8px;
+    width: 35px;
+    height: 45px;
+}
+
+.imagen-actor {
+    width: 50px;
+}
+
+.per {
+    margin: 10px 0;
+}
+
+mat-icon {
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 2rem;
+}
