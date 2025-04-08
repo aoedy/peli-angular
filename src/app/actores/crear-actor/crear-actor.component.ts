@@ -1,16 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormularioActoresComponent } from "../formulario-actores/formulario-actores.component";
 import { ActorCreacionDTO } from '../actores';
+import { Router } from '@angular/router';
+import { ActoresService } from '../actores.service';
+import { extraerErrores } from '../../compartidos/funciones/extraerErrores';
+import { MostrarErroresComponent } from "../../compartidos/componentes/mostrar-errores/mostrar-errores.component";
+import { SERVICIO_GRUD_TOKEN } from '../../compartidos/proveedores/proveedores';
+import { CrearEntidadComponent } from "../../compartidos/componentes/crear-entidad/crear-entidad.component";
 
 @Component({
   selector: 'app-crear-actor',
-  imports: [FormularioActoresComponent],
+  imports: [CrearEntidadComponent],
   templateUrl: './crear-actor.component.html',
-  styleUrl: './crear-actor.component.css'
+  styleUrl: './crear-actor.component.css',
+  providers: [
+    {provide: SERVICIO_GRUD_TOKEN, useClass: ActoresService}
+  ]
 })
 export class CrearActorComponent {
-
-  guardarCambios(actor: ActorCreacionDTO){
-    console.log('creando el actor:', actor)
-  }
+  formularioActores = FormularioActoresComponent
 }

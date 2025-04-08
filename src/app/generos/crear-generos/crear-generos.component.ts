@@ -10,29 +10,18 @@ import { GeneroCreacionDTO } from '../generos';
 import { GenerosService } from '../generos.service';
 import { extraerErrores } from '../../compartidos/funciones/extraerErrores';
 import { MostrarErroresComponent } from "../../compartidos/componentes/mostrar-errores/mostrar-errores.component";
+import { SERVICIO_GRUD_TOKEN } from '../../compartidos/proveedores/proveedores';
+import { CrearEntidadComponent } from "../../compartidos/componentes/crear-entidad/crear-entidad.component";
 
 @Component({
   selector: 'app-crear-generos',
-  imports: [MatButtonModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, FormularioGeneroComponent, MostrarErroresComponent],
+  imports: [MatButtonModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, CrearEntidadComponent],
   templateUrl: './crear-generos.component.html',
-  styleUrl: './crear-generos.component.css'
+  styleUrl: './crear-generos.component.css',
+  providers: [
+    {provide: SERVICIO_GRUD_TOKEN, useClass: GenerosService}
+  ]
 })
 export class CrearGenerosComponent {
-
-  private router = inject(Router);
-  private generosService = inject(GenerosService);
-  errores: string[] = []; 
-
-  guardarCambios(genero: GeneroCreacionDTO){    
-    this.generosService.crear(genero).subscribe({
-      next: () => {
-        this.router.navigate(['/generos']);
-      },
-      error: err => {
-        const errores = extraerErrores(err);
-        this.errores = errores;
-      }
-    });
-  }
-
+  formularioGeneros = FormularioGeneroComponent;  
 }
