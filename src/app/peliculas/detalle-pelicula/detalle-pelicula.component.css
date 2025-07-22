@@ -1,0 +1,52 @@
+mat-chip-listbox {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.estilo {
+    display: flex;
+}
+
+.estilo1 {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.estilo2 {
+    width: 225px;
+    height: 315px;
+}
+
+/*.estilo3 {
+    width : 565px;
+    height: 315px;
+}*/
+
+.estilo4 {
+    margin-top: 1rem;
+}
+
+.estilo5 {
+    display: flex;
+    flex-direction: column;
+}
+
+.estilo6 {
+    margin-bottom: 2px;
+}
+
+.estilo7 {
+    width: 50px;
+    vertical-align: middle;
+}
+
+.estilo8 {
+    display: inline-block;
+    width: 200px;
+    margin-left: 1rem;
+}
+
+.estilo9 {
+    display: inline-block;
+    width: 45px;
+}

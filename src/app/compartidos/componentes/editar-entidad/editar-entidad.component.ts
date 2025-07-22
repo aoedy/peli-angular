@@ -12,7 +12,7 @@ import { CargandoComponent } from "../cargando/cargando.component";
   templateUrl: './editar-entidad.component.html',
   styleUrl: './editar-entidad.component.css'
 })
-export class EditarEntidadComponent<TDTO, TCracionDTO> implements OnInit{
+export class EditarEntidadComponent<TDTO, TCreacionDTO> implements OnInit{
   ngOnInit(): void {
     this.servicioCRUD.obtenerPorId(this.id).subscribe(entidad => {
       this.cargarComponente(entidad);
@@ -45,7 +45,7 @@ export class EditarEntidadComponent<TDTO, TCracionDTO> implements OnInit{
 
   errores: string[] = [];
 
-  servicioCRUD = inject(SERVICIO_GRUD_TOKEN) as IServicioCRUD<TDTO, TCracionDTO>;
+  servicioCRUD = inject(SERVICIO_GRUD_TOKEN) as IServicioCRUD<TDTO, TCreacionDTO>;
   private router = inject(Router);
   cargando = true;
 
@@ -54,7 +54,7 @@ export class EditarEntidadComponent<TDTO, TCracionDTO> implements OnInit{
 
   private componenteRef!: ComponentRef<any>;
 
-  guardarCambios(entidad: TCracionDTO){    
+  guardarCambios(entidad: TCreacionDTO){    
     this.servicioCRUD.actualizar(this.id, entidad).subscribe({
       next: () => {
         this.router.navigate([this.rutaIndice]);

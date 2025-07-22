@@ -1,0 +1,50 @@
+@if (pelicula) {
+    <div>
+        <h2>{{pelicula.titulo}} ({{pelicula.fechaLanzamiento.getFullYear()}})</h2>
+
+        <mat-chip-listbox>
+            @for (genero of pelicula.generos; track $index) {
+                <mat-chip [routerLink]="['/peliculas/filtrar']" [queryParams]="{generoId: genero.id}">{{genero.nombre}}</mat-chip>
+            }
+        </mat-chip-listbox> | {{pelicula.fechaLanzamiento.toDateString()}} | Promedio: 0.0 | Tu voto: 0.0
+
+        <div class="estilo">
+            <span class="estilo1">
+                <img class="estilo2" [src]="pelicula.poster" />
+            </span>
+            @if (pelicula.trailer) {
+                <div>
+                    <iframe width="565" height="315" [src]="trailerURL" frameborder="0" allow="acceleromoter; autoplay; encryted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                    </iframe>
+                </div>
+            }
+        </div>
+        @if (pelicula.actores) {
+            <div class="estilo4">
+                <h3>Actores</h3>
+                <div class="estilo5">
+                    @for (actor of pelicula.actores; track $index) {
+                        <div class="estilo6">
+                            <img class="estilo7" [src]="actor.foto" />
+                            <span class="estilo8">
+                                {{actor.nombre}}
+                            </span>
+                            <span class="estilo9">...</span>
+                            <span>{{actor.personaje}}</span>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        
+        @if (coordenadas.length > 0) {
+            <div>
+                <h2>Mostrándose en los siguientes cines</h2>
+                <app-mapa [coordenadasIniciales]="coordenadas" [soloLectura]="true"></app-mapa>
+            </div>
+        }
+    </div>
+}@else {
+    <app-cargando></app-cargando>
+}

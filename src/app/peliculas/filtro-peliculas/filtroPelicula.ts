@@ -3,4 +3,6 @@ export interface Filtropeliculas {
     generoId: number;
     proximosEstrenos: boolean;
     enCines: boolean;
+    pagina: number;
+    recordsPorPagina: number;
 }

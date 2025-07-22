@@ -3,7 +3,7 @@
         <div class="peliculas-contenedor">
             @for (pelicula of peliculas; track $index) {
                 <div class="pelicula-contenedor">
-                    <a>
+                    <a [routerLink]="['/pelicula', pelicula.id]">
                         @if (pelicula.poster) {
                             <img [src]="pelicula.poster" width="169" height="250"/>
                         }@else {
@@ -11,11 +11,12 @@
                         }
                     </a>
                     <p>
-                        <a>{{pelicula.titulo}}</a>
+                        <a [routerLink]="['/pelicula', pelicula.id]">{{pelicula.titulo}}</a>
                     </p>
                     <div>
-                        <a mat-flat-button>Editar</a>
-                        <button mat-flat-button type="button" class="warn">Borrar</button>
+                        <a mat-flat-button [routerLink]="['/peliculas/editar', pelicula.id]">Editar</a>
+                        <button mat-flat-button type="button" class="warn" [swal]="{title: 'Confimación', 
+                            text: '¿Deseas borrar el registro?', showCancelButton: true}" (confirm)="borrar(pelicula.id)">Borrar</button>
                     </div>
                 </div>
             }

@@ -24,7 +24,7 @@ export class CrearPeliculaComponent {
   actoresSeleccionados: actorAutoCompleteDTO[] = [];
   peliculasService = inject(PeliculasService);
   router = inject(Router);
-  eroores: string[] = [];
+  errores: string[] = [];
   
   constructor() {
     this.peliculasService.crearGet().subscribe(modelo => {
@@ -45,7 +45,7 @@ export class CrearPeliculaComponent {
       },
       error: err => {
         const errores = extraerErrores(err);
-        this.eroores = errores;
+        this.errores = errores;
       }
     })
   }

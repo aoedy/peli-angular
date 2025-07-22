@@ -11,7 +11,7 @@ import { MostrarErroresComponent } from "../mostrar-errores/mostrar-errores.comp
   templateUrl: './crear-entidad.component.html',
   styleUrl: './crear-entidad.component.css'
 })
-export class CrearEntidadComponent<TDTO, TCracionDTO> implements AfterViewInit{
+export class CrearEntidadComponent<TDTO, TCreacionDTO> implements AfterViewInit{
   ngAfterViewInit(): void {
     this.componenteRef = this.contenedorFormulario.createComponent(this.formulario);
     this.componenteRef.instance.posteoFormulario.subscribe((entidad: any) => {
@@ -29,7 +29,7 @@ export class CrearEntidadComponent<TDTO, TCracionDTO> implements AfterViewInit{
 
   errores: string[] = [];
 
-  servicioCRUD = inject(SERVICIO_GRUD_TOKEN) as IServicioCRUD<TDTO, TCracionDTO>;
+  servicioCRUD = inject(SERVICIO_GRUD_TOKEN) as IServicioCRUD<TDTO, TCreacionDTO>;
   private router = inject(Router);
 
   @ViewChild('contenedorFormulario', {read: ViewContainerRef})
@@ -37,7 +37,7 @@ export class CrearEntidadComponent<TDTO, TCracionDTO> implements AfterViewInit{
 
   private componenteRef!: ComponentRef<any>;
 
-  guardarCambios(entidad: TCracionDTO){    
+  guardarCambios(entidad: TCreacionDTO){    
     this.servicioCRUD.crear(entidad).subscribe({
       next: () => {
         this.router.navigate([this.rutaIndice]);
