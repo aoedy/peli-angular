@@ -50,3 +50,7 @@ mat-chip-listbox {
     display: inline-block;
     width: 45px;
 }
+
+app-rating {
+    vertical-align: middle;
+}
